@@ -1,0 +1,80 @@
+/* INPUT BASE (reutilizado mentalmente) */
+.input-text,
+.input-select,
+.input-textarea {
+  width: 100%;
+  border-radius: 0.5rem; /* rounded-lg */
+  border: 1px solid #e2e8f0; /* slate-200 */
+  background-color: #ffffff;
+  padding: 0.5rem 0.75rem; /* py-2 px-3 */
+  font-size: 0.875rem; /* text-sm */
+  color: #1e293b; /* slate-800 */
+
+  transition: all 150ms ease;
+}
+
+/* Placeholder */
+.input-text::placeholder,
+.input-select::placeholder,
+.input-textarea::placeholder {
+  color: #94a3b8; /* slate-400 */
+}
+
+/* Focus */
+.input-text:focus,
+.input-select:focus,
+.input-textarea:focus {
+  border-color: #6366f1; /* indigo-500 */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); /* ring-indigo-500/20 */
+}
+
+/* Disabled */
+.input-text:disabled,
+.input-select:disabled,
+.input-textarea:disabled {
+  cursor: not-allowed;
+  background-color: #f8fafc; /* slate-50 */
+  color: #94a3b8; /* slate-400 */
+}
+
+/* SELECT extra */
+.input-select {
+  cursor: pointer;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+}
+
+/* TEXTAREA extra */
+.input-textarea {
+  resize: none;
+  min-height: 88px;
+}
+
+/* LABEL */
+.input-label {
+  display: block;
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500;
+  color: #64748b; /* slate-500 */
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* GROUP */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ERROR */
+.input-error {
+  font-size: 0.75rem;
+  color: #ef4444; /* red-500 */
+  margin-top: 0.125rem;
+}

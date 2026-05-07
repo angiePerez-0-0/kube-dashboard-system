@@ -1,0 +1,119 @@
+/* BASE BUTTON */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; /* gap-2 */
+
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500;
+
+    transition: all 150ms ease;
+
+    outline: none;
+    user-select: none;
+}
+
+/* FOCUS */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1); /* base fallback */
+}
+
+/* DISABLED */
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ========================= */
+/* PRIMARY */
+.btn-primary {
+    background-color: #4f46e5; /* indigo-600 */
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca; /* indigo-700 */
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 2px #6366f1; /* indigo-500 */
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* ========================= */
+/* SECONDARY */
+.btn-secondary {
+    background-color: #ffffff;
+    color: #334155; /* slate-700 */
+    border: 1px solid #e2e8f0; /* slate-200 */
+}
+
+.btn-secondary:hover {
+    background-color: #f8fafc; /* slate-50 */
+}
+
+.btn-secondary:focus {
+    box-shadow: 0 0 0 2px #cbd5f5; /* slate-300 aprox */
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+/* ========================= */
+/* DANGER */
+.btn-danger {
+    background-color: #fef2f2; /* red-50 */
+    color: #dc2626; /* red-600 */
+    border: 1px solid #fecaca; /* red-200 */
+}
+
+.btn-danger:hover {
+    background-color: #fee2e2; /* red-100 */
+}
+
+.btn-danger:focus {
+    box-shadow: 0 0 0 2px #f87171; /* red-400 */
+}
+
+.btn-danger:active {
+    transform: scale(0.98);
+}
+
+/* ========================= */
+/* GHOST */
+.btn-ghost {
+    background-color: transparent;
+    color: #64748b; /* slate-500 */
+}
+
+.btn-ghost:hover {
+    background-color: #f1f5f9; /* slate-100 */
+}
+
+.btn-ghost:focus {
+    box-shadow: 0 0 0 2px #cbd5f5; /* slate-300 */
+}
+
+.btn-ghost:active {
+    transform: scale(0.98);
+}
+
+/* ========================= */
+/* SIZES */
+.btn-sm {
+    padding: 0.375rem 0.75rem; /* px-3 py-1.5 */
+    font-size: 0.75rem; /* text-xs */
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem; /* px-6 py-3 */
+    font-size: 1rem; /* text-base */
+}

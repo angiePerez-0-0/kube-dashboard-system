@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+/* Sólo layout — cómo se posicionan el formulario y la tabla */
+.clients__layout {
+  @apply grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6;
+}
+
+.clients__form-section,
+.clients__list-section {
+  @apply bg-white rounded-xl border border-slate-200 p-6 shadow-sm;
+}
+
+.clients__form         { @apply flex flex-col gap-4 mt-4; }
+.clients__form-actions { @apply flex items-center justify-end gap-2 pt-1; }
