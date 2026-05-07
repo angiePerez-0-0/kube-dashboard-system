@@ -318,7 +318,170 @@ http://localhost:8000/docs
 * ✔ Backend funcionando localmente
 * ✔ Migración a Azure SQL completada
 * ✔ Arquitectura limpia implementada
-* ⏳ Pendiente: Dockerización y Kubernetes
+* ⏳ Pendiente: Dockerización (acr) y Kubernetes (aks) + CI/CD
+
+---
+
+# 🐳 CONTENEDORIZACIÓN DEL PROYECTO (VERSIÓN ACTUALIZADA)
+
+# 🔵 BACKEND - DOCKERFILE EXPLICADO
+
+## 📄 Dockerfile
+
+```dockerfile
+FROM python:3.11
+```
+
+👉 Imagen base oficial de Python 3.11.
+
+---
+
+```dockerfile
+ENV DEBIAN_FRONTEND=noninteractive
+```
+
+👉 Evita prompts interactivos durante instalación de paquetes (importante en Docker/CI).
+
+---
+
+```dockerfile
+WORKDIR /app
+```
+
+👉 Define el directorio de trabajo dentro del contenedor.
+
+---
+
+## 🧩 Dependencias del sistema
+
+```dockerfile
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    unixodbc \
+    unixodbc-dev \
+    curl \
+    gnupg
+```
+
+👉 Esto es CLAVE porque:
+
+* `gcc/g++` → compilar librerías Python nativas
+* `unixodbc + unixodbc-dev` → conexión a SQL Server
+* `curl + gnupg` → instalar Microsoft ODBC Driver
+
+---
+
+## 🧠 Driver de SQL Server (IMPORTANTE)
+
+```dockerfile
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
+    install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ && \
+    curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y msodbcsql18
+```
+
+👉 Instala:
+
+* **ODBC Driver 18 for SQL Server**
+
+📌 ¿Por qué es necesario?
+Porque Python (SQLAlchemy + pyodbc) necesita un traductor para conectarse a Azure SQL.
+
+---
+
+## 📦 Python dependencies
+
+```dockerfile
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+```
+
+👉 Instala librerías del backend.
+
+---
+
+## 📁 Código fuente
+
+```dockerfile
+COPY . .
+```
+
+👉 Copia todo el backend dentro del contenedor.
+
+---
+
+## 🚀 Exposición del puerto
+
+```dockerfile
+EXPOSE 8000
+```
+
+👉 FastAPI corre en el puerto 8000.
+
+---
+
+## ▶️ Ejecución
+
+```dockerfile
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+👉 Levanta la API accesible desde fuera del contenedor.
+
+---
+
+# 🧪 BACKEND - EJECUCIÓN LOCAL
+
+## 🔨 Build
+
+```bash
+docker build -t kube-dashboard-backend .
+```
+
+---
+
+## ▶️ Run
+
+```bash
+docker run -p 8000:8000 \
+  -e DB_SERVER=tu-servidor.database.windows.net \
+  -e DB_NAME=nombre_base_datos \
+  -e DB_USER=usuario_sql \
+  -e DB_PASSWORD=contraseña_sql \
+  -e SECRET_KEY=clave_secreta_jwt \
+  kube-dashboard-backend
+```
+
+---
+
+## 📌 Explicación de parámetros
+
+| Variable    | Significado                           |
+| ----------- | ------------------------------------- |
+| DB_SERVER   | URL del servidor Azure SQL            |
+| DB_NAME     | Nombre de la base de datos            |
+| DB_USER     | Usuario SQL Server                    |
+| DB_PASSWORD | Contraseña del usuario SQL            |
+| SECRET_KEY  | Llave para JWT (autenticación futura) |
+
+---
+
+## 🌐 Probar backend
+
+📍 Swagger UI:
+
+```
+http://localhost:8000/docs
+```
+
+📍 API base:
+
+```
+http://localhost:8000
+```
+
 
 ## 📚 Fuentes de información y documentación técnica
 Este proyecto fue desarrollado utilizando documentación oficial de las tecnologías involucradas y buenas prácticas de arquitectura backend y cloud.
