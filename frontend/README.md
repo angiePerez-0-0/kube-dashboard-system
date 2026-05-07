@@ -1,16 +1,63 @@
-# React + Vite
+# Frontend - Kube Dashboard System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este módulo es la interfaz web del sistema de gestión de clientes y costos, desarrollado con React y Vite.
 
-Currently, two official plugins are available:
+## Descripción
+Aplicación SPA para dashboard, gestión de clientes y costos. Conecta con la API del backend via Axios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologías
+- React 19
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Axios
+- Heroicons
 
-## React Compiler
+## Dependencias
+### Principales
+- @heroicons/react: ^2.2.0
+- axios: ^1.16.0
+- react: ^19.2.5
+- react-dom: ^19.2.5
+- react-hot-toast: ^2.6.0
+- react-router-dom: ^7.15.0
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Desarrollo
+- @eslint/js: ^10.0.1
+- @tailwindcss/vite: ^4.2.4
+- @types/react: ^19.2.14
+- @types/react-dom: ^19.2.3
+- @vitejs/plugin-react: ^6.0.1
+- autoprefixer: ^10.5.0
+- eslint: ^10.2.1
+- eslint-plugin-react-hooks: ^7.1.1
+- eslint-plugin-react-refresh: ^0.5.2
+- globals: ^17.5.0
+- postcss: ^8.5.14
+- tailwindcss: ^4.2.4
+- vite: ^8.0.10
 
-## Expanding the ESLint configuration
+## Instalación
+1. Navega a `frontend/`.
+2. Instala dependencias: `npm install`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Cómo Ejecutar
+Ejecuta el servidor de desarrollo con: `npm run dev`.
+
+La aplicación estará disponible en `http://localhost:5173`.
+
+## Scripts Disponibles
+- `npm run dev`: Inicia servidor de desarrollo
+- `npm run build`: Construye para producción
+- `npm run lint`: Ejecuta linter
+- `npm run preview`: Vista previa de build
+
+## Estructura
+- `src/`: Código fuente
+  - `components/`: Componentes UI
+  - `hooks/`: Hooks personalizados
+  - `pages/`: Páginas
+  - `services/`: Servicios API
+  - `styles/`: Estilos CSS
+- `public/`: Archivos estáticos
+- `package.json`: Configuración y dependencias
