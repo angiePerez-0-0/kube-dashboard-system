@@ -6,7 +6,7 @@ from app.interfaces.api.cost_controller import router as cost_router
 from app.infrastructure.db.session import engine
 from app.infrastructure.db.models import Base
 
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine) #SQLAlchemy crea las tablas automáticamente en Azure SQL
 
 app = FastAPI(title="Gestión de Clientes y Costos")
 
