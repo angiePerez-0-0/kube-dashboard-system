@@ -119,11 +119,12 @@ metadata:
   name: backend-secret
 type: Opaque
 data:
-  DB_SERVER: <base64>
-  DB_NAME: <base64>
-  DB_USER: <base64>
-  DB_PASSWORD: <base64>
-  SECRET_KEY: <base64>
+  # Para codificar: [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("tu-valor"))
+  DB_SERVER: <base64_de_tu_servidor.database.windows.net>
+  DB_NAME: <base64_del_nombre_de_tu_base_de_datos>
+  DB_USER: <base64_del_usuario_sql>
+  DB_PASSWORD: <base64_de_tu_contraseña_sql>
+  SECRET_KEY: <base64_de_tu_clave_secreta_jwt>
 ```
 
 ### `k8s/backend-deployment.yaml`
