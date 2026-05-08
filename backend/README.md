@@ -318,7 +318,10 @@ http://localhost:8000/docs
 * ✔ Backend funcionando localmente
 * ✔ Migración a Azure SQL completada
 * ✔ Arquitectura limpia implementada
-* ⏳ Pendiente: Dockerización (acr) y Kubernetes (aks) + CI/CD
+* ✔ Contenedor Docker construido y probado
+* ✔ Imagen publicada en Azure Container Registry
+* ✔ Desplegado en Azure Kubernetes Service (AKS)
+* ✔ Pipeline CI/CD configurado en Azure DevOps
 
 ---
 
@@ -329,10 +332,10 @@ http://localhost:8000/docs
 ## 📄 Dockerfile
 
 ```dockerfile
-FROM python:3.11
+FROM python:3.11-slim
 ```
 
-👉 Imagen base oficial de Python 3.11.
+> Se usa `python:3.11-slim` en lugar de `python:3.11` para reducir el tamaño de la imagen (~900MB → ~200MB). Es compatible con la instalación manual del ODBC Driver 18.
 
 ---
 

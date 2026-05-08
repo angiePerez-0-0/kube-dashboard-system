@@ -209,7 +209,7 @@ docker build --build-arg VITE_API_URL=/api -t kube-dashboard-frontend .
 
 ---
 
-# 🧠 ARQUITECTURA FINAL (LO QUE ESTÁS CONSTRUYENDO)
+# 🧠 ARQUITECTURA FINAL 
 
 ```
 [ React Frontend (Nginx) ]
@@ -220,3 +220,42 @@ docker build --build-arg VITE_API_URL=/api -t kube-dashboard-frontend .
             ↓
 [ Azure SQL Database ]
 ```
+
+---
+
+# 💡 NOTAS IMPORTANTES SOBRE EL BUILD EN CONTENEDOR
+
+## Variable `VITE_API_URL`
+
+Vite embebe las variables de entorno en el JS estático **en tiempo de build**, no en tiempo de ejecución. Por eso:
+
+- El `ARG VITE_API_URL` en el Dockerfile debe declararse **antes** del `COPY . .` para que Docker invalide el caché correctamente y re-ejecute `npm run build` con el valor correcto.
+- Si el ARG se declara después del COPY, Docker puede usar caché y el valor no queda embebido en el JS.
+
+### Orden correcto en el Dockerfile:
+```dockerfile
+COPY package.json package-lock.json ./
+RUN npm install
+
+ARG VITE_API_URL        ← antes del COPY . .
+ENV VITE_API_URL=$VITE_API_URL
+
+COPY . .
+RUN npm run build
+```
+
+## Proxy Nginx (`nginx.conf`)
+
+En Kubernetes, el frontend no llama directamente al backend — pasa por nginx que hace proxy interno:
+Browser → /api/clients/ → Nginx → http://backend-service:8000/clients/
+
+El nombre `backend-service` es el nombre del Service de Kubernetes definido en `k8s/backend-deployment.yaml`.
+
+## Estado actual del proyecto
+
+* ✔ Frontend funcionando localmente
+* ✔ Contenedor Docker construido y probado
+* ✔ Imagen publicada en Azure Container Registry
+* ✔ Desplegado en Azure Kubernetes Service (AKS)
+* ✔ Pipeline CI/CD configurado en Azure DevOps
+* ✔ Proxy nginx configurado para routing en Kubernetes
