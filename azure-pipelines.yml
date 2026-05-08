@@ -71,7 +71,7 @@ stages:
             inputs:
               action: deploy
               connectionType: kubernetesServiceConnection
-              kubernetesServiceConnection: aks-connection
+              kubernetesServiceConnection: aks-connection-kube-dashboard-system
               namespace: default
               manifests: k8s/backend-deployment.yaml
               containers: $(BACKEND_IMAGE):$(Build.BuildId)
@@ -81,7 +81,7 @@ stages:
             inputs:
               action: deploy
               connectionType: kubernetesServiceConnection
-              kubernetesServiceConnection: aks-connection
+              kubernetesServiceConnection: aks-connection-kube-dashboard-system
               namespace: default
               manifests: k8s/frontend-deployment.yaml
               containers: $(FRONTEND_IMAGE):$(Build.BuildId)
