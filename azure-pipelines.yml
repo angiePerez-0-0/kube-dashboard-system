@@ -21,7 +21,7 @@ stages:
           - task: Docker@2
             displayName: Build and push backend
             inputs:
-              containerRegistry: acr-connection
+              containerRegistry: acr-connection-kube-dashboard-system
               repository: backend
               command: buildAndPush
               dockerfile: backend/Dockerfile
@@ -38,7 +38,7 @@ stages:
           - task: Docker@2
             displayName: Build and push frontend
             inputs:
-              containerRegistry: acr-connection
+              containerRegistry: acr-connection-kube-dashboard-system # service connection a traves de devops
               repository: frontend
               command: buildAndPush
               dockerfile: frontend/Dockerfile
@@ -62,7 +62,7 @@ stages:
             inputs:
               action: deploy
               connectionType: kubernetesServiceConnection
-              kubernetesServiceConnection: aks-connection
+              kubernetesServiceConnection: aks-connection-kube-dashboard-system # service connection a traves de devops
               namespace: default
               manifests: k8s/secret.yaml
 
